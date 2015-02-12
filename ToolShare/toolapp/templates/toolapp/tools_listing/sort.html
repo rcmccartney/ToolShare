@@ -1,0 +1,22 @@
+<div style="margin-bottom:15px" >
+	<div class="pull-left">
+		Showing <strong>{{tool_list|length}}</strong> results{% if search %}
+		for <strong>"{{search}}"</strong>
+		{% endif %}. Page {{ tool_list.number }} of {{ tool_list.paginator.num_pages }}.
+	</div>
+	<div class="pull-right">
+		Sort by <select class="tools-sort-by" data-href="?search={% firstof search ""%}">
+		<option value="-id" {% if sort = "-id" %}selected="selected"{%endif%}>Date</option>
+		<option value="make" {% if sort = "make" %}selected="selected"{%endif%}>Make</option>
+		</select>
+		&nbsp;&nbsp;
+		<a href="?{{layout_type}}=list&amp;search={% firstof search ""%}">
+			<span class="glyphicon glyphicon-th-list" {% if layout = "list" %}style="color:#e47911"{% endif %}></span>
+		</a>
+		&nbsp;&nbsp;
+		<a href="?{{layout_type}}=cols&amp;search={% firstof search ""%}">
+			<span class="glyphicon glyphicon-th-large" {% if layout = "cols" %}style="color:#e47911"{% endif %}></span>
+		</a>
+	</div>
+	<div style="clear:both"></div>
+</div>

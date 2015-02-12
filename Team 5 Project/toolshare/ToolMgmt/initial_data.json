@@ -1,0 +1,75 @@
+[
+  {
+    "model": "ToolMgmt.ToolCategory",
+    "pk": 1,
+    "fields": {
+      "name": "Painting",
+      "description": "Tool for painting"
+    }
+  },
+  {
+    "model": "ToolMgmt.ToolCategory",
+    "pk": 2,
+    "fields": {
+      "name": "Carpentry",
+      "description": "Tools to perform cutting, shaping, etc."
+    }
+  },
+  {
+    "model": "ToolMgmt.ToolCategory",
+    "pk": 3,
+    "fields": {
+      "name": "Gardening",
+      "description": "Tools to perform landscaping needs."
+    }
+  },
+  {
+    "model": "ToolMgmt.ToolCategory",
+    "pk": 4,
+    "fields": {
+      "name": "Powertools",
+      "description": "Motorized tools."
+    }
+  },
+  {
+    "model": "ToolMgmt.ToolCategory",
+    "pk": 5,
+    "fields": {
+      "name": "Handtool",
+      "description": "Tools like screwdriver, etc."
+    }
+  },
+  {
+    "model": "ToolMgmt.ToolStatus",
+    "pk": 1,
+    "fields": {
+      "name": "Available",
+      "description": "The tool is not in used and can be shared."
+    }
+  },
+  {
+    "model": "ToolMgmt.ToolStatus",
+    "pk": 2,
+    "fields": {
+      "name": "Shared",
+      "description": "The tool is being shared."
+    }
+  },
+  {
+    "model": "ToolMgmt.ToolStatus",
+    "pk": 3,
+    "fields": {
+      "name": "Broken",
+      "description": "The tool is broken."
+    }
+  },
+  {
+    "model": "ToolMgmt.ToolStatus",
+    "pk": 4,
+    "fields": {
+      "name": "Lost",
+      "description": "The tool is lost."
+    }
+  }
+]
+

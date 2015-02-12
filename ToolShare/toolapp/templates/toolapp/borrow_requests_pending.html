@@ -1,0 +1,58 @@
+<div class="panel panel-{%if waiting_requests%}info{%else%}default{%endif%}">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Pending <span class="badge">{{waiting_requests|length}}</span>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      {% if waiting_requests %}
+      <table class="table">
+      <thead>
+        <tr>  
+          <th>From</th>
+          <th>Borrower Message</th>
+          <th>Tool</th>
+          <th>From</th>
+          <th>To</th>
+          <!-- <th>Last Updated</th> -->
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+{% for request in waiting_requests %}
+<tr>
+  
+  <td>{{request.borrower.user.username}}</td>
+<td>{{request.requestMessage}}</td>
+<td><div><img src="{{request.tool.get_picture_or_default}}" style="width:50px;height:50px" class=" img-thumbnail" /></div>
+
+      <div>{{request.tool.make}} {{request.tool.model}}</div></td>
+      <td>{{request.fromDate}}</td>
+      <td>{{request.toDate}}</td>
+      <!-- <td>{{request.updatedAt}}</td> -->
+      <td>
+        <button type="button" class="btn btn-success" 
+          data-toggle="modal" 
+          data-target="#approve-modal"
+          data-borrow-request-id="{{request.id}}">Approve</button>
+        <button type="button" class="btn btn-danger" 
+          data-toggle="modal" 
+          data-target="#reject-modal" 
+          data-borrow-request-id="{{request.id}}">Reject</button>
+      </td>
+
+</tr>
+{% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+<div class="panel-body">
+        No pending requests.
+      </div>
+      {% endif %}
+
+
+    </div>
+  </div>

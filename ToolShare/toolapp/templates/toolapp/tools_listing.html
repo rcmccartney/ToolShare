@@ -1,0 +1,21 @@
+{% include 'toolapp/tools_listing/searchform.html' %}
+
+{% if tool_list %}
+	{% include 'toolapp/tools_listing/sort.html' %}
+	{% if layout == "list" %}
+		{% include "toolapp/tools_listing/list.html" %}
+	{% else %}
+		{% include "toolapp/tools_listing/cols.html" %}
+	{%endif%}
+	{% else %}
+	<div class="alert alert-info">
+		{% if search %}
+		Your search for <b>"{{search}}"</b> yielded no results. 
+		{% elif my_tools %}
+		You have no tools registered. <a href="/tools/register">Register Tool</a>
+		{% else %}
+		No tools available.
+		{% endif %}
+	</div>
+{% endif %}
+

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title_html %}
+  Tool listing
+{% endblock %}
+{% block h1 %}
+  {{ bloc.super }}
+{% endblock %}
+{% block article_content %}
+  
+  <h1>Received requests (waiting)</h1>
+  {% if waiting_requests|length > 0 %}
+    <table>
+      <thead>
+        <tr>
+          <td>Request</td>
+          <td></td>
+          <td>From</td>
+          <td>To</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+      {% for request in waiting_requests %}
+        <tr>
+          <td>{{ request }}</td>
+          <td>{% if request.tool.image %}<img src="{{ request.tool.image.url }}" width="100">{% else %}no image{% endif %}</td>
+          <td>{{ request.start_date }}</td>
+          <td>{{ request.end_date }}</td>
+          <td><a href={% url 'sharing:received-request-detail' request.id %}>Detail/Approve...</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <span>No requests.</span>
+  {% endif %}
+
+  <h4>Approved requests</h4 >
+  {% if approved_requests|length > 0 %}
+    <table>
+      <thead>
+        <tr>
+          <td>Request</td>
+          <td></td>
+          <td>From</td>
+          <td>To</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+      {% for request in approved_requests %}
+        <tr>
+          <td>{{ request }}</td>
+          <td>{% if request.tool.image %}<img src="{{ request.tool.image.url }}" width="50">{% else %}no image{% endif %}</td>
+          <td>{{ request.start_date }}</td>
+          <td>{{ request.end_date }}</td>
+          <td><a href={% url 'sharing:received-request-detail' request.id %}>Detail/Approve...</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <span>No requests.</span>
+  {% endif %}
+  <h4>Past requests</h4>
+  {% if past_requests|length > 0 %}
+    <table>
+      <thead>
+        <tr>
+          <td>Request</td>
+          <td></td>
+          <td>From</td>
+          <td>To</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+      {% for request in past_requests %}
+        <tr>
+          <td>{{ request }}</td>
+          <td>{% if request.tool.image %}<img src="{{ request.tool.image.url }}" width="50">{% else %}no image{% endif %}</td>
+          <td>{{ request.start_date }}</td>
+          <td>{{ request.end_date }}</td>
+          <td>{{ request.approved }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <span>No requests.</span>
+  {% endif %}
+{% endblock %}

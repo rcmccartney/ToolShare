@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title_html %}
+  Create Your own Shed!
+{% endblock %}
+{% block h1 %}
+  {{ bloc.super }}
+{% endblock %}
+{% block article_content %}
+<h1>Create Your own Shed!</h1>
+    <form  enctype="multipart/form-data" action= {% url 'sharing:shedcreate' %} method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="button" type="submit" value="Create" />
+    </form>
+    <br>
+    <a class="button" href="{% url 'sharing:sheds' %}">Back</a>
+{% endblock %}

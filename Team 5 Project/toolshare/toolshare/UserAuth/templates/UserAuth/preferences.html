@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title_html %}
+  User Preferences
+{% endblock %}
+{% block h1 %}
+  {{ bloc.super }}
+{% endblock %}
+{% block article_content %}
+<h1> Preferences </h1>
+<form action={% url 'users:preferences' %} method="post">
+    {{ form }} 
+</form>
+{% endblock %}

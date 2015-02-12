@@ -1,0 +1,27 @@
+TEAM 3/4?
+
+Names on first slide
+R1 slide
+R2 Product slide
+Reset password
+Quality Assurance slide?
+Regression testing, ad-hoc testing?
+Shed on Google map - cool
+Open a shed
+Change shed's address
+
+TEAM 4
+Need names on first slide
+"TEST DRIVEN DEVELOPMENT"
+Process slides?
+OUR UNIT TESTS??
+
+TEAM 1
+Used real email
+Nice nav bar on the left side
+Blackout dates not allowed
+Delete a request!
+Reservation history
+Sendgrid & codeship
+targetprocess?
+

@@ -1,0 +1,21 @@
+<div class="row">
+	{% for tool in tool_list %}
+	
+	<div class="col-sm-3 text-center" style="margin-bottom:0px;padding:15px;">
+		<div style="border: 1px solid #ddd;border-radius: 4px;padding:15px;height:412px">
+		<div style="height:231px;overflow:hidden;position:relative;"><img style="width:100%;" class="valign-center"  src="{{tool.get_picture_or_default}}" /></div>
+		<h4 style="color:#428bca;margin-top:10px;padding-top:10px;margin-bottom:0px;border-top: 1px solid #ddd;height:30px;overflow:hidden;">{{tool.make}} {{tool.model}}</h4>		
+		<div style="height:20px;overflow:hidden;"><small>{{tool.description}}</small></div>
+		<div style="height:20px;overflow:hidden;"><small><a href="/tools/{{tool.id}}/availability">Check availability</a></small></div>
+		<div style="height:20px"><span class="label {{tool.getLocationLabel}}">{{tool.getLocationText}}</span></div>
+		<div style="margin-top:15px">{% include "toolapp/tools_listing/actionbtn.html" %}</div>
+	</div>
+	</div>
+	{% if forloop.counter|divisibleby:4 %}
+    </div>
+    <div class="row">
+    {% endif %}
+	{% endfor %}
+</div>
+
+{% include "toolapp/tools_listing/paginationnav.html" %}

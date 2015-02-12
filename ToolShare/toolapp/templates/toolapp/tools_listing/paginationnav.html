@@ -1,0 +1,17 @@
+<nav>
+	<ul class="pager">
+	    
+	        {% if tool_list.has_previous %}
+	            <li>
+	            	<a href="?page={{ tool_list.previous_page_number }}&search={% firstof search "" %}&sort={% firstof sort "" %}">previous</a>
+	        	</li>
+	        {% endif %}
+
+	        {% if tool_list.has_next %}
+	        	<li>
+	            	<a href="?page={{ tool_list.next_page_number }}&search={% firstof search "" %}&sort={% firstof sort "" %}">next</a>
+	        	</li>
+	        {% endif %}
+	    
+	</ul>
+</nav>

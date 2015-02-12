@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}ToolShare - Borrow Requests{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-header">
+    <h1>Borrow Requests</h1>
+  </div>
+
+{% if msg == 'approved' %}
+<div class="alert alert-success">The borrow request was <strong>approved</strong> successfully.</div>
+{% endif %}
+{% if msg == 'rejected' %}
+<div class="alert alert-success">The borrow request was <strong>rejected</strong> successfully.</div>
+{% endif %}
+{% if msg == 'finished' %}
+<div class="alert alert-success">The borrow request was <strong>finished</strong> successfully.</div>
+{% endif %}
+
+<div class="panel-group" id="accordion">
+  {% include "toolapp/borrow_requests_pending.html" %}
+  {% include "toolapp/borrow_requests_approved.html" %}
+  {% include "toolapp/borrow_requests_rejected.html" %}
+  {% include "toolapp/borrow_requests_finished.html" %}
+</div>
+
+<div class="modal fade" id="approve-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    
+    <div class="modal-content">
+<form action="{% url 'toolapp.views.borrow_request_approve' %}" 
+        method="post" role="form" class="form-horizontal" enctype="multipart/form-data" novalidate>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Approve Borrow Request</h4>
+      </div>
+      <div class="modal-body">
+       
+    {% csrf_token %}
+    {% bootstrap_form approve_form layout='horizontal' horizontal_field_class='col-md-10' %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Approve</button>
+      </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+<div class="modal fade" id="reject-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="{% url 'toolapp.views.borrow_request_reject' %}" 
+        method="post" role="form" class="form-horizontal" enctype="multipart/form-data" novalidate>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Reject Borrow Request</h4>
+      </div>
+      <div class="modal-body">
+        
+    {% csrf_token %}
+    {% bootstrap_form reject_form layout='horizontal' horizontal_field_class='col-md-10' %}
+ 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger submit">Reject</button>
+      </div>
+    </div>
+     </form>
+  </div>
+</div>
+
+{% endblock content %}

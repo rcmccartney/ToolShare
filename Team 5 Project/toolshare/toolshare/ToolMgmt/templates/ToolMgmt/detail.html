@@ -1,0 +1,65 @@
+      {% extends "base.html" %}
+{% block title_html %}
+  Tool detail
+{% endblock %}
+{% block h1 %}
+  {{ bloc.super }}
+{% endblock %}
+{% block article_content %} 
+    <h1>Tool Detail</h1>
+    <form action="{% url 'toolmgmt:detail' tool.id %}" method="post">
+      <table>
+        {% csrf_token %}
+        <thead>
+          <tr>
+            <td>ID:</td>
+            <td>{{ tool.id}}</td>
+          </tr>
+        <tr>
+            <td>Name:</td>
+            <td>{{ tool.name }}</td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td>{{ tool.description }}</td>
+        </tr>
+        <tr>
+            <td>Active:</td>
+            <td>{{ tool.active }}</td>
+        </tr>
+        <tr>
+            <td>Category:</td>
+            <td>{{ tool.category }}</td>
+        </tr>
+        <tr>
+            <td>Status:</td>
+            <td>{{ tool.status }}</td>
+        </tr>
+        <tr>
+            <td>Image:</td>
+            {% if tool.image %}
+                <td><img src="{{ tool.image.url }}" width="300" ></td>
+            {% else %}
+                <td>no image found</td>
+            {% endif %}
+        </tr>
+        </thead>
+      </table>
+      {% if is_owner %}
+            {% if not tool.inshed  %}
+                <a class="button" href={% url 'sharing:tooltransfer' tool.id %}> Transfer to Shed </a>
+                <a class="button" href={% url 'toolmgmt:tool_editition' tool.id %}>Edit tool</a>
+                <button class="button" type="submit">Activate/Deactivate</button>
+            {% else %}
+                <a class="button" href="#">Get Back my Tool</a>
+            {% endif %}
+      {% endif %}
+      {% if iscoordinator %}
+        {% if tool.inshed %}
+            <a class="button" href="#">Return to owner</a>
+        {% endif %}    
+      {% endif %}
+
+    <br>
+    <a href="{% url 'toolmgmt:tools' %}">Back</a> | <a href={% url 'toolmgmt:tool_editition' tool.id %}>Edit tool</a>
+{% endblock %}

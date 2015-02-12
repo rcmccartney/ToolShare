@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+<head>
+{% block title_html %}
+  Tool registration
+{% endblock %}
+
+<script type="text/javascript">
+$(document).ready(function() {
+    alert("hi");
+});
+</script>
+{% block h1 %}
+  {{ bloc.super }}
+{% endblock %}
+</head>
+{% block article_content %}
+    <form  action= {% url 'sharing:create-request' tool.id %} method="post">
+        {% csrf_token %}
+        <table>
+          <tr>
+            <td>{% if tool.image %}<img src="{{ tool.image.url }}" width="300">{% else %}no image{% endif %}</td>
+            <td>owner: {{ tool.owner }} </td>
+            <td>pickup arrengement: {{ tool.owner.pickup_loc }} </td>
+          </tr>
+        </table>
+        {{ form.as_p }}
+        <input class="small button" type="submit" value="Request" />
+    </form>
+{% endblock %}

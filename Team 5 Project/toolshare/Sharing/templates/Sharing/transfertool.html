@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title_html %}
+  Tool Transfer 
+{% endblock %}
+{% block h1 %}
+<h1> Tool transfer </h1>
+{% endblock %}
+  {{ bloc.super }}
+{% block article_content %}
+<form  action="{%url 'sharing:tooltransfer' tool.id%}" method="post">
+        {% csrf_token %}
+
+{% if mysheds|length > 0 %}
+    <select name="shed">
+        <option value="-1">-----Select-----</option>
+        {% for shed in mysheds %}
+            <option value="{{ shed.id }}">{{ shed.name }}</option>
+        {% endfor %}
+    </select>
+    <input class="button" type="submit" value="Transfer" />
+{%else%}
+    <br/>
+    There are no sheds in your zone.
+    {% endif %}
+</form>
+<a class="button" href="{% url 'toolmgmt:detail' tool.id %}">Back</a>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title_html %}
+  Tool listing
+{% endblock %}
+{% block h1 %}
+  {{ bloc.super }}
+{% endblock %}
+{% block article_content %}
+  <h1>Asked request listing</h1>
+  {% if requests|length > 0 %}
+    <table>
+      <thead>
+        <tr>
+          <td>Request</td>
+          <td></td>
+          <td>From</td>
+          <td>To</td>
+          <td>Accepted</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+      {% for request in requests %}
+        <tr>
+          <td>{{ request }}</td>
+          <td>{% if request.tool.image %}<img src="{{ request.tool.image.url }}" width="100">{% else %}no image{% endif %}</td>
+          <td>{{ request.start_date }}</td>
+          <td>{{ request.end_date }}</td>
+          <td>{{ request.approved }}</td>
+          <td><a href={% url 'sharing:asked-request-detail' request.id %}>show</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <span>No requests.</span>
+  {% endif %}
+{% endblock %}

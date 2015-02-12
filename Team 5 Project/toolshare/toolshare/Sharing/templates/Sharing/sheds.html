@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title_html %}
+  shed listing
+{% endblock %}
+{% block h1 %}
+  {{ bloc.super }}
+{% endblock %}
+{% block article_content %}
+  <h1>shed listing</h1>
+  {% if all_sheds|length > 0 %}
+    <table>
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Name</td>
+          <td>Description</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for shed in all_sheds %}
+        <tr>
+          <td>{{ shed.id }}</td>
+          <td>{{ shed.name }}</td>
+          <td>{{ shed.description }}</td>
+          <td><a class="button" href="{% url 'sharing:sheddetail' shed.id %}">Show</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <span>No sheds in your Sharezone. Dare to Create one!</span>
+  {% endif %}
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if all_sheds.has_previous %}
+            <a class="button" href="?page={{ all_sheds.previous_page_number }}">previous</a>
+            <a href="?page={{ all_sheds.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ all_sheds.number }} of {{ all_sheds.paginator.num_pages }}.
+        </span>
+        {% if all_sheds.has_next %}
+            <a class="button" href="?page={{ all_sheds.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+  </div>
+  <a class="button" href={% url 'sharing:shedcreate' %}>New shed</a>
+{% endblock %}

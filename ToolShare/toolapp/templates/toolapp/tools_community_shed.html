@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}ToolShare - Tools{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 20px">
+
+	{% include 'toolapp/tools_listing.html' %}
+        <a class="btn btn-default" href="{% url 'community_shed_mylist' %}">
+	  	<span class="glyphicon glyphicon-arrow-left"></span>
+	  	Back to My Community Sheds
+    </a>
+</div>
+{% endblock content %}

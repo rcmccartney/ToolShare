@@ -1,0 +1,364 @@
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}{% endblock %}</title>
+    {% bootstrap_css %}
+    <link href="{% static "cal/fullcalendar.css" %}" rel="stylesheet">
+    <link href="{% static "css/custom.css" %}" rel="stylesheet">
+    <link href="{% static "css/custom2.css" %}" rel="stylesheet">
+    <link href="{% static "css/zebra_metallic.css" %}" rel="stylesheet">
+	<link href="{% static "css/fonts.css" %}" rel="stylesheet">
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+  </head>
+
+<body>
+  <div class="header">
+      <div class="container">
+        <div class="navbar-header">
+        <a href="{% url 'toolapp.views.home' %}" class="logo-icon">
+          <img src="{% static "img/logo3.png" %}">
+        </a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="menu">
+            <li class=""><a href="{% url 'toolapp.views.home' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li><a href="{% url 'toolapp.views.tools' %}"><span class="glyphicon glyphicon-wrench"></span> Tools</a></li>
+            
+            
+            {% block nav_user %}
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'toolapp.views.stats' %}"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
+            <li><a href="{% url 'toolapp.views.borrow_requests' %}">Requests <span class="badge">{{user.tooluser.borrow_requests_waiting|length}}</span></a></li>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown2 nav">
+                  <a href="#" style="margin-top:-12px" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>  {{ user.get_username }} &nbsp; <span class="caret"></span></a>
+                  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                    <li><a href="{% url 'toolapp.views.my_tools' %}">My Tools</a></li>
+                    <li><a href="{% url 'toolapp.views.my_reservations' %}">My Reservations</a></li>
+                    <li><a href="{% url 'toolapp.views.tools_register' %}">Register Tool</a></li>
+                    <li><a href="{% url 'toolapp.views.community_shed_create' %}">Create Community Shed</a></li>
+                    <li><a href="{% url 'toolapp.views.community_shed_mylist' %}">My Community Sheds</a></li>
+                    <li><a href="{% url 'toolapp.views.profile_preferences' %}">My Preferences</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{% url 'django.contrib.auth.views.logout' %}">Sign out</a></li>
+                  </ul>
+                
+              </ul>
+
+            {% endif %}
+          {% endblock %}
+  
+          </ul>
+          
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+{% block content %}
+{% endblock %}
+
+  </div> <!-- wrapper -->
+
+  <div class="break" style="margin-top: 30px"></div>
+
+  <div id="page-footer">
+	<div class="container">
+	  <footer>
+		<hr />
+		<p>Copyright &copy; 2014. tigerPaws</p>
+	  </footer>
+    </div>
+  </div>
+
+  <script src="{% static "js/jquery.min.js" %}"></script>
+  {% bootstrap_javascript jquery=False %}
+  <script src="{% static "js/bootbox.min.js" %}"></script>
+  <script src="{% static "css/app.js" %}"></script>
+  <script src="{% static "js/zebra_datepicker.js" %}"></script>
+  <script src="/static/js/highcharts/js/highcharts.js"></script>
+  <script src="/static/js/highcharts/js/highcharts-3d.js"></script>
+
+{% if usecalendar %}
+  <script src='/static/cal/lib/moment.min.js'></script>
+<script src='/static/cal/lib/jquery.min.js'></script>
+<script src='/static/cal/fullcalendar.min.js'></script>
+{% endif %}
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var disabled_dates = [];
+      {% if disabled_dates %}
+      disabled_dates = '{{disabled_dates}}'.split(",");
+      {% endif %}
+
+      //console.log(disabled_dates);
+        // assuming the controls you want to attach the plugin to
+        // have the "datepicker" class set
+        $('input.datepicker-from').Zebra_DatePicker({
+          direction: true,
+          pair: $('.datepicker-to'),
+          readonly_element:false,
+          default_position:"below",
+          disabled_dates:disabled_dates
+        });
+        $('.datepicker-to').Zebra_DatePicker({
+          direction: 1,
+          readonly_element:false,
+          default_position:"below",
+          disabled_dates:disabled_dates
+        });
+
+        setInterval(function(){
+
+          var value = $('input.datepicker-from').val();
+          if(value){
+            $('.datepicker-to').removeAttr("disabled");
+          }
+          else{
+            $('.datepicker-to').attr("disabled","disabled");
+          }
+
+        },250);
+
+    });
+  </script>
+
+  {% if borrow_stats %}
+
+    <script type="text/javascript">
+    $(function() {
+        $('.chart-active-borrowers').each(function()  {
+
+        var title = $(this).attr("title");
+
+        $(this).highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: 1,//null,
+                plotShadow: false
+            },
+            title: {
+               text: title
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Percentage',
+                data: [
+                    {% for key, value in borrow_stats.items %}
+
+                        ['{{key}}' , {{value}}],
+
+                    {% endfor %}
+                ]
+            }]
+        });
+    });
+
+    $("text").each(function(){
+      if($(this).html().indexOf('Highcharts.com')>=0){
+        $(this).remove();
+      }
+    });
+});
+</script>
+{% endif %}
+
+  {% if lend_stats %}
+    <script type="text/javascript">
+    $(function() {
+        $('.chart-active-lenders').each(function()  {
+
+        var title = $(this).attr("title");
+        var statsType = $(this).attr("data-stats");
+
+        $(this).highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: 1,//null,
+                plotShadow: false
+            },
+            title: {
+               text: title
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Percentage',
+                data: [
+                    {% for key, value in lend_stats.items %}
+
+                        ['{{key}}' , {{value}}],
+
+                    {% endfor %}
+                ]
+            }]
+        });
+    });
+
+    $("text").each(function(){
+      if($(this).html().indexOf('Highcharts.com')>=0){
+        $(this).remove();
+      }
+    });
+
+    $('#reject-modal,#approve-modal').on('show.bs.modal', function(e) {
+        //get data-id attribute of the clicked element
+        var reqId = $(e.relatedTarget).data('borrow-request-id');
+
+        //populate the textbox
+        $(e.currentTarget).find('input[name="borrow_request_id"]').val(reqId);
+        $(e.currentTarget).find('textarea').val("");
+      });
+
+    /* Accept and reject forms */
+    $('#reject-modal').each(function() {
+
+
+        var self = this;
+        setInterval(function () {
+            var textarea = $("textarea", self);
+            if (!textarea.val()) {
+                $("button.submit", self).attr("disabled", "disabled");
+            }
+            else {
+                $("button.submit", self).removeAttr("disabled");
+            }
+        }, 250);
+    });
+});
+</script>
+{% endif %}
+
+{% if tool_stats %}
+  <script type="text/javascript">
+$(function () {
+    $('.chart-active-tools').each(function() {
+
+         var title = $(this).attr("title");
+
+        $(this).highcharts({
+            chart: {
+                type: 'column',
+                margin: 75,
+                options3d: {
+                    enabled: false,
+                    alpha: 10,
+                    beta: 25,
+                    depth: 70
+                }
+            },
+            title: {
+                text: title
+            },
+            plotOptions: {
+                column: {
+                    depth: 25
+                }
+            },
+            xAxis: {
+                categories: [
+                    {% for key, value in tool_stats.items %}
+                        '{{key}}',
+                {% endfor %}
+                ]
+            },
+            yAxis: {
+                opposite: true
+            },
+            series: [
+                {
+                    name: 'Requested Tools',
+                    data: [
+                    {% for key, value in tool_stats.items %}
+                        {{value}},
+                    {% endfor %}
+                    ],
+                }
+            ]
+        });
+    });
+
+    $("text").each(function(){
+      if($(this).html().indexOf('Highcharts.com')>=0){
+        $(this).remove();
+      }
+    });
+});
+</script>
+{% endif %}
+
+<script type="text/javascript">
+
+    $(function(){
+
+        $('#reject-modal,#approve-modal').on('show.bs.modal', function(e) {
+        //get data-id attribute of the clicked element
+        var reqId = $(e.relatedTarget).data('borrow-request-id');
+
+        //populate the textbox
+        $(e.currentTarget).find('input[name="borrow_request_id"]').val(reqId);
+        $(e.currentTarget).find('textarea').val("");
+      });
+
+    /* Accept and reject forms */
+    $('#reject-modal').each(function() {
+
+
+        var self = this;
+        setInterval(function () {
+            var textarea = $("textarea", self);
+            if (!textarea.val()) {
+                $("button.submit", self).attr("disabled", "disabled");
+            }
+            else {
+                $("button.submit", self).removeAttr("disabled");
+            }
+        }, 250);
+    });
+
+    $("select.tools-sort-by").change(function(){
+      var href = $(this).data("href");
+      document.location.href = href + "&sort=" + this.value;
+    });
+    });
+
+</script>
+
+</body>
+</html>

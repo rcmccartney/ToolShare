@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load admin_urls %}
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+  <body>
+    <div class="header">
+      <div class="container">
+        <a href="{% url 'toolapp.views.home' %}" class="logo-icon">
+          <img src="{% static "img/logo2.png" %}">
+        </a>
+
+        <ul class="menu">
+          <li><a href="#">Get the App</a></li>
+          <li><a href="#">Tutorials</a></li>
+          <li><a href="#">Magazines</a></li>
+          <li><a href="#">Web Tools</a></li>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Careers</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">More <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Community</a></li>
+              <li><a href="#">Our Blog</a></li>
+              <li><a href="#">Maps Blog</a></li>
+              <li><a href="#">Eng Blog</a></li>
+              <li><a href="#">Advertisers</a></li>
+              <li><a href="#">Publishers</a></li>
+              <li><a href="#">About Us</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="slider">
+      <div class="slide active-slide">
+        <div class="container">
+          <div class="row">
+            <div class="slide-copy col-xs-5">
+              <h1>Skip your next trip to the Hardware Store</h1>
+              <p>ToolShare is a community of friends that want to help each other. Need a tool for your next project? Here, borrow mine.</p>
+            </div>
+            <div class="slide-img col-xs-7">
+              <img src="{% static "img/oldH.jpg" %}" width="700px">
+            </div>
+          </div>
+        </div>      
+      </div>
+
+      <div class="slide slide-feature">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <a href="#"><img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/cnn.png"></a>
+              <a href="#">Read Now</a>
+            </div>
+          </div>
+        </div>      
+      </div> 
+
+      <div class="slide">
+        <div class="container">
+          <div class="row">
+            <div class="slide-copy col-xs-5">
+              <h1>Enjoy Flipboard Magazines</h1>
+              <h2>on the Web</h2>
+              <p>Millions of people use Flipboard to read and collect the news they care about, curating their favorite stories into their own magazines on any topic imaginable. Now magazines created by our readers, from Dali to End Trafficking, can be shared and enjoyed on the Web by anyone, anywhere.</p>
+              
+            </div>
+            <div class="slide-img col-xs-7">
+              <img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/magazines.png">
+            </div>
+          </div>
+        </div>      
+      </div> 
+
+
+      <div class="slide">
+        <div class="container">
+          <div class="row">
+            <div class="slide-copy col-xs-5">
+              <h1>Badges & Widgets</h1>
+              <p>Millions of people use Flipboard to read and collect the news they care about, curating their favorite stories into their own magazines. Now you can promote the ones you create or think are awesome.</p>
+              
+              <ul class="get-app">
+                <li><a href="#"><img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/ios.png"></a></li>
+                <li><a href="#"><img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/android.png"></a></li>
+                <li><a href="#"><img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/windows.png"></a></li>
+                <li><a href="#"><img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/blackberry.png"></a></li>
+              </ul>
+            </div>
+            <div class="slide-img col-xs-7">
+              <img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/bw.png" width="540px">
+            </div>
+          </div>
+        </div>      
+      </div> 
+
+    </div>
+
+    <div class="slider-nav">
+      <a href="#" class="arrow-prev"><img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/arrow-prev.png"></a>
+      <ul class="slider-dots">
+        <li class="dot active-dot">&bull;</li>
+        <li class="dot">&bull;</li>
+        <li class="dot">&bull;</li>
+        <li class="dot">&bull;</li>
+      </ul>
+      <a href="#" class="arrow-next"><img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/arrow-next.png"></a>
+    </div>
+
+    <div class="neighborhood-guides">
+        <div class="container">
+            <h2>Community Sheds</h2>
+            <p>Not sure where to stay? We've created neighborhood guides for cities all around the world.</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://goo.gl/0sX3jq">
+                    </div>
+                    <div class="thumbnail">
+                        <img src="http://goo.gl/an2HXY">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://goo.gl/Av1pac">
+                    </div>
+                    <div class="thumbnail">
+                        <img src="http://goo.gl/vw43v1">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://goo.gl/0Kd7UO">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
+{% endblock %}

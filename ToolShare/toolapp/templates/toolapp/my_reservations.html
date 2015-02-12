@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}ToolShare - My Reservations{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-header">
+    <h1>My Reservations</h1>
+  </div>
+
+
+{% if msg == 'approved' %}
+<div class="alert alert-success">The borrow request was <strong>approve</strong> successfully.</div>
+{% endif %}
+
+{% if msg == 'requested' %}
+<div class="alert alert-success">The borrow request was <strong>sent</strong> successfully.</div>
+{% endif %}
+
+{% if msg == 'reserved' %}
+<div class="alert alert-success">The blackout date was set successfully.</div>
+{% endif %}
+
+
+  {% if reservations %}
+      <table class="table">
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Your Message</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Lender Message</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+{% for reservation in reservations %}
+<tr class="{{reservation.get_row_class}}">
+<td><div><img src="{{reservation.tool.get_picture_or_default}}" style="width:50px;height:50px" class=" img-thumbnail" /></div>
+  <div>{{reservation.tool.make}} {{reservation.tool.model}}</div></td>
+    <td>{{reservation.requestMessage}}</td>
+  
+      <td>{{reservation.fromDate}}</td>
+      <td>{{reservation.toDate}}</td>
+      <td>{% firstof reservation.statusMessage "None" %}</td>
+      <td style="{{reservation.get_status_style}}">{{reservation.get_status_display}}</td>
+</tr>
+{% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+<div class="alert alert-warning">
+        You have no reservations.
+      </div>
+      {% endif %}
+</div>
+
+
+{% endblock content %}

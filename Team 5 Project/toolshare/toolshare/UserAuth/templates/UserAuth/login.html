@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title_html %}
+  Login
+{% endblock %}
+{% block h1 %}
+  {{ bloc.super }}
+{% endblock %}
+{% block article_content %}
+    <h1>Login</h1>
+    <form id="login_form" method="post" action="/users/login/">
+        {% csrf_token %}
+        Username: <input type="text" name="username" value="" size="50" /> <br />
+        Password: <input type="password" name="password" value="" size="50" /> <br />
+        <input class="button" type="submit" value="Submit" /> <a class="button" href={% url 'users:sign_up' %}> Sign up </a>
+    </form>
+{% endblock %}

@@ -1,0 +1,45 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          Rejected <span class="badge">{{rejected_requests|length}}</span>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+{% if rejected_requests %}
+      <table class="table">
+      <thead>
+        <tr>
+          <th>From</th>
+          <th>Borrower Message</th>
+          <th>Tool</th>
+          <th>From</th>
+          <th>To</th>
+          <!-- <th>Last Updated</th> -->
+          <th>Your Message</th>
+        </tr>
+      </thead>
+      <tbody>
+{% for request in rejected_requests %}
+<tr>
+  <td>{{request.borrower.user.username}}</td>
+<td>{{request.requestMessage}}</td>
+<td><div><img src="{{request.tool.get_picture_or_default}}" style="width:50px;height:50px" class=" img-thumbnail" /></div>
+
+      <div>{{request.tool.make}} {{request.tool.model}}</div></td>
+      <td>{{request.fromDate}}</td>
+      <td>{{request.toDate}}</td>
+      <!-- <td>{{request.updatedAt}}</td> -->
+      <td>{{request.statusMessage}}</td>
+</tr>
+{% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+<div class="panel-body">
+        No rejected requests.
+      </div>
+      {% endif %}
+</div>
+  </div>

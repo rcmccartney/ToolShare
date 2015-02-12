@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load admin_urls %}
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% block title %}ToolShare - Homepage{% endblock %}
+{% block content %}
+  <body>
+    <div class="slider">
+      <div class="slide active-slide">
+        <div class="container">
+          <div class="row">
+            <div class="slide-copy col-xs-5">
+              <h1>Skip your next trip to the Hardware Store</h1>
+              <p>ToolShare is a community of friends that want to help each other. Need a tool for your next project? Here, borrow mine.</p>
+              	<div class="button_container">
+		          {% if not user.is_authenticated %}
+                  <p><a class="btn btn-lg btn-primary" href="{% url 'registration_register' %}">Sign Up</a> &nbsp;
+                    <a class="btn btn-lg btn-success" href="{% url 'django.contrib.auth.views.login' %}">Login</a>
+                  </p>
+		          {% endif %}
+		        </div> <!-- /.container -->
+            </div>
+            <div class="slide-img col-xs-7">
+              <img src="{% static "img/oldH.jpg" %}" width="700px">
+            </div>
+          </div>
+        </div>      
+      </div>
+
+      <div class="slide slide-feature">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <a href="#"><img src="{% static "img/logoW.png" %}"></a>
+              <a href="{% url 'registration_register' %}">Try It Now</a>
+            </div>
+          </div>
+        </div>      
+      </div> 
+
+      <div class="slide">
+        <div class="container">
+          <div class="row">
+            <div class="slide-copy col-xs-5">
+              <h1>Enjoy Tool Sharing</h1>
+              <h2>through the Web</h2>
+              <p>We have tools for any job imaginable. Don't spend a ton of money on that specialy widget you use once and store in the basement.  Instead, dust your old tools off and join the sharing revolution.  Tools are meant to be shared through the Web and enjoyed by anyone, anywhere.</p>
+
+            </div>
+            <div class="slide-img col-xs-7">
+               <img src="{% static "img/screws.jpg" %}">
+            </div>
+          </div>
+        </div>      
+      </div> 
+
+
+      <div class="slide">
+        <div class="container">
+          <div class="row">
+            <div class="slide-copy col-xs-5">
+              <h1>Borrow & Lend</h1>
+              <p>Have a tool collecting dust?  Are there neighbors in need where you live?  Starting lending your tools to neighbors in your community, and you will reap cosmic karma.  Plus, next time your UFO breaks you have a friend nearby.</p>
+            </div>
+            <div class="slide-img col-xs-7">
+              <img src="{% static "img/neighbors.jpg" %}" width="700px" align="bottom">
+            </div>
+          </div>
+        </div>      
+      </div> 
+
+    </div>
+
+    <div class="slider-nav">
+      <a href="#" class="arrow-prev"><img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/arrow-prev.png"></a>
+      <ul class="slider-dots">
+        <li class="dot active-dot">&bull;</li>
+        <li class="dot">&bull;</li>
+        <li class="dot">&bull;</li>
+        <li class="dot">&bull;</li>
+      </ul>
+      <a href="#" class="arrow-next"><img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/arrow-next.png"></a>
+    </div>
+
+    <div class="neighborhood-guides">
+        <div class="container">
+            <h2>Community Sheds</h2>
+            <p>We have community tool libraries set up in cities all around the world. So no matter where you are, we've got you covered.</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://goo.gl/0sX3jq">
+                    </div>
+                    <div class="thumbnail">
+                        <img src="http://goo.gl/an2HXY">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://goo.gl/Av1pac">
+                    </div>
+                    <div class="thumbnail">
+                        <img src="http://goo.gl/vw43v1">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="{% static "img/family2.jpg" %}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
+{% endblock %}

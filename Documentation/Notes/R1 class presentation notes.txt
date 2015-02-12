@@ -1,0 +1,86 @@
+PRESENTATION NOTES
+
+Team 1:
+
+features 
+process 
+design 
+demo
+
+Process - Kanban board
+
+System class - sharezonoe list
+-users
+-Tool itself has a sharing location
+-List of ShareZone atrributes added to system
+
+Users and Shed list in the ShareZone
+User class no register method? - System class
+Django authentication
+
+Professor:
+
+DONT READ OFF SLIDES
+SAY SOMETHING BEYOND ON THE SLIDES
+HAVE A DRIVER & A TALKER FOR THE DEMO
+
+Team 3:
+
+Why do you need to all use the same editor?
+django-widget-tweaks
+Pillow-Python Imaging Library Fork
+
+COMPONENTS - ROHAN NEEDS TO FIX THIS
+Profile Management
+Tool Management
+Shed Management Statistics
+
+PRODUCT DESIGN PROCESS:
+Plan the testing process
+Scrum wriitng??
+
+DIDNT TEST THEIR SYSTEM>>>
+NEED A PROJECT MANAGEMENT TOOL
+
+Team 5:
+
+Tool Registration
+Deactivate/Activate
+Account Management
+
+Design/documentation decisions
+Recording meeting minutes
+
+UI simple, focused on backend
+FUTURE TIMELINE!!
+
+TEAM 2:
+
+RISKS!
+
+Design: User, Tool, Shed, ShareZone, Reservation - FIVE MAIN CONTROLLERS??
+Create Community Shed!
+MODELS IN SEVERAL FILES?
+
+TEAM 4:
+PAssword recovery/changing
+Tool registration & listing
+THEY LISTED MORE FEATURES EVEN THOUGH WE HAVE THEM TOO
+Automated tests
+Bootstrap & jQuery
+VIEWS - functions or classes that extend Django generic Views
+User extends base user from Django Framework
+trello.com - CARD BASED APPROACH
+
+weekly meetings on google drive??? 
+moqups.com for UI? - allows for a base??
+django-registration?
+Notifications
+CREATE SHED?!
+
+
+
+
+
+
+

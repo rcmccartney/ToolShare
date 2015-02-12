@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title_html %}
+  Sign up
+{% endblock %}
+{% block h1 %}
+  {{ bloc.super }}
+{% endblock %}
+{% block article_content %}
+    <h1>Sign up</h1>
+
+    {% if signed_up %}
+        <strong> Thank you for registering!</strong>
+    {% else %}
+        <strong>Create your account:</strong><br />
+
+        <form id="user_form" method="post" action="/users/signup/" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <input class= "button" type="submit" name="submit" value="Sign up" />
+        </form>
+    {% endif %}
+{% endblock %}

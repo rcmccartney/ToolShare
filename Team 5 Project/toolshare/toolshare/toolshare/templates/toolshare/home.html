@@ -1,0 +1,49 @@
+
+{% extends "base.html" %}
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title> {% block title_html %} Home {% endblock %}</title>
+<meta name="description" content="Documentation and reference library for ZURB Foundation. JavaScript, CSS, components, grid and more."/>
+<meta name="author" content="ZURB, inc. ZURB network also includes zurb.com"/>
+<meta name="copyright" content="ZURB, inc. Copyright (c) 2014"/>
+<link rel="stylesheet" href="http://foundation.zurb.com/assets/css/templates/foundation.css"/>
+<script src="http://foundation.zurb.com/assets/js/modernizr.js"></script>
+{% block h1 %}
+  {{ bloc.super }}
+{% endblock %}
+
+{% block article_content %}
+<div class="row">
+<div class="large-12 columns">
+<div id="featured" data-orbit>
+<img src="http://www.hisiafurniture.com/wp-content/uploads/2014/09/striking-tools-1024x768.jpg" alt="slide image">
+<img src="http://cycology371.com/wp-content/uploads/2014/08/IMG_1133.2-1024x768.jpg" alt="slide image">
+<img src="http://cdn2.business2community.com/wp-content/uploads/2013/11/tools.jpg" alt="slide image">
+</div>
+</div>
+</div>
+    <h1>Toolshare Web application</h1>
+    <p>
+      Welcome to toolshare.
+      <br>
+      The application used to share tools in your neighborhood within your community
+    </p>
+{% endblock %}
+<script>
+  document.write('<script src=js/vendor/' +
+  ('__proto__' in {} ? 'zepto' : 'jquery') +
+  '.js><\/script>')
+  </script>
+<script src="http://foundation.zurb.com/assets/js/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+<script>
+    $(document).foundation();
+  </script>
+<script src="http://foundation.zurb.com/assets/js/templates/jquery.js"></script>
+<script src="http://foundation.zurb.com/assets/js/templates/foundation.js"></script>
+<script>
+      $(document).foundation();
+
+      var doc = document.documentElement;
+      doc.setAttribute('data-useragent', navigator.userAgent);
+    </script>

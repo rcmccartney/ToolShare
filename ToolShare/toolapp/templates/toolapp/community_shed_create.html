@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}ToolShare - Create Community Shed{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-header">
+    <h1>Create Community Shed</h1>
+  </div>
+    <form action="{% url 'toolapp.views.community_shed_create' %}" 
+        method="post" role="form" class="form-horizontal" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+
+    <div class="form-group">
+      <label class="col-md-2 control-label">City*</label> <div class="col-md-4"><input type="text" class="form-control" disabled="disabled" value="{{tooluser.city}}"></div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-2 control-label">State*</label> <div class="col-md-4"><input type="text" class="form-control" disabled="disabled" value="{{tooluser.state}}"></div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-2 control-label">Zipcode*</label> <div class="col-md-4"><input type="text" class="form-control" disabled="disabled" value="{{tooluser.zipcode}}"></div>
+    </div>
+
+    {% buttons %}
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">
+        Create Community Shed
+      </button>
+    </div>
+    {% endbuttons %}
+    <p>*City, State and Zipcode must be the same as your current address</p>
+  </form>
+</div>
+{% endblock content %}

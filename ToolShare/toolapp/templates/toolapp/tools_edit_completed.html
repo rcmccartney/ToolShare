@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}ToolShare - Tools{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-header">
+    <h1>Edit Tool</h1>
+  </div>
+    <p>Tool was succesfully updated.</p>
+    <p><a href="{% url 'toolapp.views.tools_register' %}">Register a tool</a> or <a href="/my-tools">go to my tools</a> or <a href="{% url 'tools'%}">go to available tools</a></p>
+</div>
+{% endblock content %}

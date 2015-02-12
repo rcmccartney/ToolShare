@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title_html %}
+  Tool registration
+{% endblock %}
+{% block h1 %}
+  {{ bloc.super }}
+{% endblock %}
+{% block article_content %}
+    <form  action= {% url 'sharing:create-request' tool.id %} method="post">
+        {% csrf_token %}
+        <table>
+          <tr>
+            <td><img src="{{ tool.image.url }}" width="300" ></td>
+            <td>owner: {{ tool.owner }} </td>
+            <td>pickup arrengement: {{ tool.owner.pickup_loc }} </td>
+          </tr>
+        </table>
+        {{ form.as_p }}
+        <input class="small button" type="submit" value="Request" />
+    </form>
+{% endblock %}

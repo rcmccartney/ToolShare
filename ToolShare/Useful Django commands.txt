@@ -1,0 +1,27 @@
+﻿python -c "import django; print(django.get_version())" #django version should be 1.6
+python -c "import sys; sys.path = sys.path[1:]; import django; print(django.__path__)"  #gives django path
+
+python manage.py runserver #starts the server.  DONT use for production! Use APACHE instead
+
+$ python manage.py syncdb #creates database tables according to settings.py. Use after any modifications to models
+
+$ python manage.py sql <app_name>  #display SQL before it is committed to db
+
+MORE:
+python manage.py validate – Checks for any errors in the construction of your models.
+python manage.py sqlcustom polls – Outputs any custom SQL statements (such as table modifications or constraints) that are defined for the application.
+python manage.py sqlclear polls – Outputs the necessary DROP TABLE statements for this app, according to which tables already exist in your database (if any).
+python manage.py sqlindexes polls – Outputs the CREATE INDEX statements for this app.
+python manage.py sqlall polls – A combination of all the SQL from the sql, sqlcustom, and sqlindexes commands.
+
+$ python manage.py shell #interactive shell to manipulate the DB
+
+Whenever you create a form that alters data server-side, use method="post".
+# Always return an HttpResponseRedirect after successfully dealing
+# with POST data. This prevents data from being posted twice if a
+# user hits the Back button. (Do this in the view)
+
+All POST forms that are targeted at internal URLs should use the {% csrf_token %} template tag.
+
+The reverse() function in the HttpResponseRedirect constructor helps avoid having to hardcode a URL in the view function. It is given the name of the view that we want to 
+pass control to and the variable portion of the URL pattern that points to that view.

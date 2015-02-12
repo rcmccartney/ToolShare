@@ -1,0 +1,26 @@
+<ul class="list-group">
+{% for tool in tool_list %}
+<li class="list-group-item">
+	<div class="media">
+	      <a class="pull-left" href="#">
+	        <img class="media-object img-thumbnail" alt="64x64"  src="{{tool.get_picture_or_default}}" style="width: 100px; height: 100px;">
+	      </a>
+	      <div class="media-body">
+	      	<div style="display:inline-block">
+	        <h4 class="media-heading">{{tool.make}} {{tool.model}} </h4>
+	        <a href="/tools/{{tool.id}}/availability">Check availability</a> <br>
+	        {{tool.description}} <br><span class="label {{tool.getLocationLabel}}">{{tool.getLocationText}}</span>
+</div>
+	        <!-- Split button -->
+	        <div class="pull-right" style="display:inline-block; padding-top:30px; padding-right:30px" >
+	        {% include "toolapp/tools_listing/actionbtn.html" %}
+	    	</div>
+
+	      </div>
+	</div>
+</li>
+
+{% endfor %}
+</ul>
+
+{% include "toolapp/tools_listing/paginationnav.html" %}

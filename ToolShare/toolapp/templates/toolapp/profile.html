@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block title %}Profile - Personal Information{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-offset-2 col-sm-10">
+      <h1>Profile<br><small>{{ user.get_username }}</small></h1>
+  	  <p>{{ user.get_full_name }}</p>
+	    <p> <a href="{% url 'profile' %}">Go to Profile</a></p>        
+    </div>
+  </div>
+
+{% if messages %}
+
+    {% for message in messages %}
+    <p{% if message.tags %} class="alert alert-success" {% endif %}>{{ message }}</p>
+    {% endfor %}
+
+{% endif %}
+
+  <form action="{% url 'profile_personalInfo' %}"
+        method="post" role="form" class="form-horizontal" novalidate>
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+
+    {% buttons %}
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon "ok" %} Update
+      </button>
+    </div>
+    {% endbuttons %}
+  </form>
+
+</div>
+{% endblock %}
+

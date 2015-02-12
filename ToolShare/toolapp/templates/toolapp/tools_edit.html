@@ -1,0 +1,65 @@
+
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}ToolShare - Tools{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-header">
+    <h1>Edit Tool</h1>
+  </div>
+  <a class="btn btn-default btn-xs" href="{% url 'tools_blackout_dates' tool.id %}">Change tool availability</a>
+
+<script type="text/javascript">
+function confimartion(form) {
+    var confirmationNeeded = '{{ tool.confirmationNeeded }}';
+    var status = document.getElementById("id_status"); 
+    var statusChanged =document.getElementById("statusChanged");
+
+    if (confirmationNeeded=='True' && status.value==1)
+    {
+      if (status.value.toString()!= '{{tool.status}}')
+      {        
+        bootbox.confirm('<h3 style="margin-bottom:1em">Are you sure?</h3>This tool has active reservations. Are you sure you want to deactivate this tool? If you confirm changes, an email will be sent to borrowers',function(r){
+          
+          var x = document.getElementById("confirmed");
+          if (r==true)
+          {
+            statusChanged.value="yes";
+            x.setAttribute("value", "yes");
+            form.submit();
+          }
+          else
+          {
+            x.setAttribute("value", "no");
+            //return false;
+          }
+        });
+        return false;
+        
+      }
+    }
+    return true;
+}
+</script>
+
+
+    <form action="{% url 'tools_edit' tool.id %}" 
+        method="post" role="form" class="form-horizontal" enctype="multipart/form-data" novalidate onsubmit="return confimartion(this)">
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+
+<input id='confirmed' type='hidden' name='confirmed' value='yes' >
+<input id='statusChanged' type='hidden' name='statusChanged' value='no' >
+
+    {% buttons %}
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">
+        Update Tool
+      </button>
+      <a href="/my-tools/" class="btn btn-default">Cancel</a>
+    </div>
+    {% endbuttons %}
+  </form>
+</div>
+{% endblock content %}

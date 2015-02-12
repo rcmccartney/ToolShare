@@ -1,0 +1,64 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          Approved <span class="badge">{{approved_requests|length}}</span>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+{% if approved_requests %}
+      <table class="table">
+      <thead>
+        <tr>
+          <th>From</th>
+          <th>Borrower Message</th>
+          <th>Tool</th>
+          <th>From</th>
+          <th>To</th>
+<!--           <th>Last Updated</th> -->
+          <th>Your Message</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+{% for request in approved_requests %}
+<tr>
+  
+  <td>{{request.borrower.user.username}}</td>
+<td>{{request.requestMessage}}</td>
+<td><div><img src="{{request.tool.get_picture_or_default}}" style="width:50px;height:50px" class=" img-thumbnail" /></div>
+
+      <div>{{request.tool.make}} {{request.tool.model}}</div></td>
+      <td>{{request.fromDate}}</td>
+      <td>{{request.toDate}}</td>
+      <!-- <td>{{request.updatedAt}}</td> -->
+      <td>{{request.statusMessage}}</td>
+
+      <td>
+        
+        <form action="{% url 'toolapp.views.borrow_request_finish' %}" 
+        method="POST" role="form" class="form-horizontal" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="borrow_request_id" value="{{request.id}}">
+        {% if request.canBeFinished %}
+        <button type="submit" class="btn btn-success"     
+          data-borrow-request-id="{{request.id}}">Mark as returned</button>
+          {%else%}
+          <button type="submit" class="btn btn-success"        disabled="disabled" 
+          data-borrow-request-id="{{request.id}}">Mark as returned</button>
+        {% endif %}
+        </form>
+      </td>
+      
+</tr>
+{% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+<div class="panel-body">
+        No approved requests.
+      </div>
+      {% endif %}
+</div>
+  </div>

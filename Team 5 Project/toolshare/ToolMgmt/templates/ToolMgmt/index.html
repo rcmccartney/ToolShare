@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title_html %}
+  Tool listing
+{% endblock %}
+{% block h1 %}
+  {{ bloc.super }}
+{% endblock %}
+{% block article_content %}
+  <h1>Tool listing</h1>
+  {% if all_tools|length > 0 %}
+    <table>
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Name</td>
+          <td>Description</td>
+          <td>Status</td>
+          <td>Owner</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tool in all_tools %}
+        <tr>
+          <td>{{ tool.id }}</td>
+          <td>{{ tool.name }}</td>
+          <td>{{ tool.description }}</td>
+          <td>{{ tool.status }}</td>
+          <td>{{ tool.owner }}</td>
+          <td>{% if tool.image %}<img src="{{ tool.image.url }}" width="100">{% else %}no image{% endif %}</td>
+          <td><a class="button" href="{% url 'toolmgmt:detail' tool.id %}">Show</a></td>
+          <td><a class="button" href="{% url 'sharing:create-request' tool.id %}">Ask</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <span>No tool.</span>
+  {% endif %}
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if all_tools.has_previous %}
+            <a class="button" href="?page={{ all_tools.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ all_tools.number }} of {{ all_tools.paginator.num_pages }}.
+        </span>
+        {% if all_tools.has_next %}
+            <a class="button" href="?page={{ all_tools.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+  </div>
+  <a class="button" href={% url 'toolmgmt:register' %}>New tool</a>
+{% endblock %}

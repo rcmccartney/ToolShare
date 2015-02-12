@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title_html %}
+ Shed detail
+{% endblock %}
+{% block h1 %}
+  {{ bloc.super }}
+{% endblock %}
+{% block article_content %} 
+<h1>{{shed.name}}</h1>
+    <form action="{% url 'sharing:sheddetail' shed.id %}" method="post">
+      <table>
+        {% csrf_token %}
+        <thead>
+        <tr>
+            <td>Name:</td>
+            <td>{{ shed.name }}</td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td>{{ shed.description }}</td>
+        </tr>
+        </thead>
+      </table>
+  <h3>Tools in shed</h3>
+  {%if shed.tools.all|length > 0 %}
+  <table>
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Name</td>
+          <td>Description</td>
+          <td>Status</td>
+          <td>Owner</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tool in shed.tools.all %}
+        <tr>
+          <td>{{ tool.id }}</td>
+          <td>{{ tool.name }}</td>
+          <td>{{ tool.description }}</td>
+          <td>{{ tool.status }}</td>
+          <td>{{ tool.owner }}</td>
+          <td>{% if tool.image %}<img src="{{ tool.image.url }}" width="100">{% else %}no image{% endif %}</td>
+          <td><a class="button" href="{% url 'toolmgmt:detail' tool.id %}">Show</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <span>No tool.</span>
+  {% endif %}
+
+        <br/>
+  <h3>Coordinators</h3>
+  <table>
+    {% for coordinator in shed.coordinators.all %}
+      <tr>
+        <td>{{ coordinator }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  {%if is_coord %}
+      <a class="button" href="{% url 'sharing:shededit' shed.id %}">Edit</a>
+        {% else %}
+        Not a coordinator
+
+  {% endif %}
+
+{% endblock %}

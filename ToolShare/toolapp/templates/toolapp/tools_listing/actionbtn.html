@@ -1,0 +1,9 @@
+{% if can_borrow %}
+<a href="/tools/{{tool.id}}/borrow" class="btn btn-primary">
+	Borrow &raquo;
+</a>
+{% elif can_edit %}
+<a href="/tools/{{tool.id}}/edit" class="btn btn-primary">
+	Edit
+</a>
+{% endif %}

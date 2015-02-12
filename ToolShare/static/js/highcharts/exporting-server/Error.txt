@@ -1,0 +1,3 @@
+Controller and interceptor should be located here:
+
+C:\Users\mccar_000\Desktop\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\WEB-INF\classes\com\highcharts\export

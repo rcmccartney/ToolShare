@@ -1,0 +1,19 @@
+<h1>{{ user }}</h1>
+
+{% if user %}
+<ul>
+    <li>First name: {{ user.first_name }}</li>
+    <li>Last name: {{ user.last_name }}</li>
+    <li>Email: {{ user.email }}</li>
+    <li>Joined recently?: {{ user.joined_recently }}</li>
+</ul>
+<h2>Tools</h2>
+<ul>
+{% for tool in user.tool_set.all %}
+    <li>{{ tool }}</li>
+{% endfor %}
+</ul>
+
+{% else %}
+    <p>User not found.</p>
+{% endif %}

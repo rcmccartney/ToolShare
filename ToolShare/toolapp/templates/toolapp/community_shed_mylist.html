@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}ToolShare - My Community Shed{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-header">
+    <h1>My Community Sheds</h1>
+  </div>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Address1</th>
+			<th>Address2</th>
+		</tr>
+	</thead>
+  {% for community_shed in cs_list %}
+  <tr>
+  	<td>{{community_shed.name}}</td>
+  	<td>{{community_shed.address1}}</td>
+  	<td>{{community_shed.address2}}</td>
+  	<td><a class="btn btn-success btn-xs" href="{%url 'tools_community_shed' community_shed.id %}">view tools </a></td>
+  </tr>
+	{% empty %}
+	<div class="alert alert-info">
+		You have no community sheds. <a href="/community-shed/create">Create Community Shed</a>
+	</div>
+	{% endfor %}
+</table>
+</div>
+{% endblock content %}
+

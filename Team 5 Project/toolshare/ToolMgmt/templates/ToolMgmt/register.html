@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title_html %}
+  Tool registration
+{% endblock %}
+{% block h1 %}
+  {{ bloc.super }}
+{% endblock %}
+{% block article_content %}
+    <h1> Tool Register </h1>
+    <form  enctype="multipart/form-data" action= {% url 'toolmgmt:register' %} method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="small button" type="submit" value="Register" />
+    </form>
+    <a class="small button" href="{% url 'toolmgmt:tools' %}">Back</a>
+{% endblock %}

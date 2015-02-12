@@ -1,0 +1,27 @@
+To install necessary modules to run from your local machine:
+
+1) Run the following:
+pip install django-bootstrap3
+pip install django-registration
+pip install django-localflavor
+pip install image
+
+2)Edit this file: 
+C:\Python34\Lib\site-packages\registration\models.py (it may have a different path in your pachine)
+
+Replace lines 106-110 with the following:
+salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:5]
+salted_username = salt + user.username
+activation_key = hashlib.sha1(salted_username.encode('utf-8')).hexdigest()
+
+Save file!
+
+3) Open localhost:8000
+
+
+
+ADDED SINCE R1:
+
+% pip install django-reversion
+% cd django-grappelli-stable-2.5.x
+% python setup.py install
